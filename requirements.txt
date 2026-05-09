@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+sqlalchemy
+pydantic
+python-multipart
+pandas
+pytest
+pytest-cov
+httpx
+python-jose[cryptography]

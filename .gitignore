@@ -1,0 +1,61 @@
+# Virtual Environment
+venv/
+env/
+
+# Python Cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# SQLite Database
+*.db
+*.sqlite3
+
+# Environment Variables
+.env
+
+# VS Code
+.vscode/
+
+# Pytest Cache
+.pytest_cache/
+
+# Coverage Reports
+htmlcov/
+.coverage
+
+# Uploads
+uploads/
+
+# Logs
+*.log
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Docker
+docker-compose.override.yml
+
+# MySQL Data
+mysql_data/
+
+# IDE Files
+.idea/
+
+# Temporary Files
+*.tmp
+
+# Build Files
+dist/
+build/
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+
+# Gunicorn
+gunicorn.pid
+
+# Test Database
+test.db
