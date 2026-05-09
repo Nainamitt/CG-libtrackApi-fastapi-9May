@@ -1,17 +1,21 @@
-def test_add_book(test_client):
+def test_create_book(test_client):
 
     response = test_client.post(
         "/books",
         json={
-            "title": "Python",
+            "title": "Python Basics",
             "author": "Naina",
-            "isbn": "9999",
+            "isbn": "1111",
             "category": "Programming",
-            "quantity": 10
+            "quantity": 5
         }
     )
 
     assert response.status_code == 200
+
+    data = response.json()
+
+    assert "id" in data
 
 
 def test_get_books(test_client):
@@ -23,26 +27,29 @@ def test_get_books(test_client):
 
 def test_update_book(test_client):
 
-    # First create book
-    test_client.post(
+    # Create book
+    create_response = test_client.post(
         "/books",
         json={
-            "title": "Python",
-            "author": "Naina",
-            "isbn": "8888",
+            "title": "Old Book",
+            "author": "Author",
+            "isbn": "2222",
             "category": "Programming",
-            "quantity": 10
+            "quantity": 5
         }
     )
 
+    book_id = create_response.json()["id"]
+
+    # Update
     response = test_client.put(
-        "/books/1",
+        f"/books/{book_id}",
         json={
-            "title": "Updated Python",
-            "author": "Naina",
-            "isbn": "8888",
-            "category": "Programming",
-            "quantity": 20
+            "title": "Updated Book",
+            "author": "Updated Author",
+            "isbn": "3333",
+            "category": "Technology",
+            "quantity": 10
         }
     )
 
@@ -51,18 +58,23 @@ def test_update_book(test_client):
 
 def test_delete_book(test_client):
 
-    # First create book
-    test_client.post(
+    # Create book
+    create_response = test_client.post(
         "/books",
         json={
             "title": "Delete Book",
-            "author": "Naina",
-            "isbn": "7777",
+            "author": "Author",
+            "isbn": "4444",
             "category": "Programming",
             "quantity": 5
         }
     )
 
-    response = test_client.delete("/books/1")
+    book_id = create_response.json()["id"]
+
+    # Delete
+    response = test_client.delete(
+        f"/books/{book_id}"
+    )
 
     assert response.status_code == 200

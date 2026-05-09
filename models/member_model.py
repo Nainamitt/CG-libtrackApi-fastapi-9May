@@ -1,5 +1,7 @@
 from sqlalchemy import Column, Integer, String
+
 from database import Base
+
 
 class Member(Base):
 
@@ -9,6 +11,6 @@ class Member(Base):
 
     name = Column(String)
 
-    email = Column(String, unique=True)
+    email = Column(String)
 
     course = Column(String)

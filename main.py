@@ -1,24 +1,29 @@
 from fastapi import FastAPI
-from database import engine, Base
 
-from routers import (
-    book_routes,
-    member_routes,
-    borrow_routes,
-    auth_routes,
-    analytics_routes
-)
+from database import Base, engine
 
+from routers.book_routes import router as book_router
+from routers.member_routes import router as member_router
+from routers.borrow_routes import router as borrow_router
+
+# Create Database Tables
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
-    title="LibTrack API",
-    description="Smart Library Management System",
-    version="1.0"
+    title="LibTrack API Platform"
 )
 
-app.include_router(book_routes.router)
-app.include_router(member_routes.router)
-app.include_router(borrow_routes.router)
-app.include_router(auth_routes.router)
-app.include_router(analytics_routes.router)
+# Register Routers
+app.include_router(book_router)
+
+app.include_router(member_router)
+
+app.include_router(borrow_router)
+
+
+@app.get("/")
+def home():
+
+    return {
+        "message": "LibTrack API Running Successfully"
+    }
